@@ -860,6 +860,14 @@ export default class MetamaskController extends EventEmitter {
         this.qrHardwareKeyring.cancelReadCryptoHDKey,
         this.qrHardwareKeyring,
       ),
+      submitQRHardwareSignature: nodeify(
+        this.qrHardwareKeyring.submitSignature,
+        this.qrHardwareKeyring,
+      ),
+      cancelQRHardwareSignRequest: nodeify(
+        this.qrHardwareKeyring.cancelSignRequest,
+        this.qrHardwareKeyring,
+      ),
 
       // mobile
       fetchInfoToSync: nodeify(this.fetchInfoToSync, this),

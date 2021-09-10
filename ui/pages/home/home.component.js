@@ -84,6 +84,7 @@ export default class Home extends PureComponent {
     setRecoveryPhraseReminderHasBeenShown: PropTypes.func.isRequired,
     setRecoveryPhraseReminderLastShown: PropTypes.func.isRequired,
     seedPhraseBackedUp: PropTypes.bool.isRequired,
+    hasQRHardwareSignRequest: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -104,10 +105,14 @@ export default class Home extends PureComponent {
       showAwaitingSwapScreen,
       swapsFetchParams,
       pendingConfirmations,
+      hasQRHardwareSignRequest,
     } = this.props;
 
     // eslint-disable-next-line react/no-unused-state
     this.setState({ mounted: true });
+    if (hasQRHardwareSignRequest) {
+      return;
+    }
     if (isNotification && totalUnapprovedCount === 0) {
       global.platform.closeCurrentWindow();
     } else if (!isNotification && showAwaitingSwapScreen) {
