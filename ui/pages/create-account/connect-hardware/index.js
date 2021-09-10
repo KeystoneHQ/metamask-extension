@@ -257,12 +257,15 @@ class ConnectHardwareForm extends Component {
   }
 
   renderContent() {
+    const param = new URLSearchParams(this.props.location.search);
+    const isQRCodeOpen = param.get('qrcode') === 'on';
     if (!this.state.accounts.length) {
       return (
         <SelectHardware
           connectToHardwareWallet={this.connectToHardwareWallet}
           browserSupported={this.state.browserSupported}
           useLedgerLive={this.props.useLedgerLive}
+          isQRCodeOpen={isQRCodeOpen}
         />
       );
     }

@@ -32,6 +32,8 @@ import UnlockPage from '../unlock-page';
 import Alerts from '../../components/app/alerts';
 import Asset from '../asset';
 
+import QRHardwareStateWatcher from './QRHardwareStateWatcher';
+
 import {
   ADD_TOKEN_ROUTE,
   ASSET_ROUTE,
@@ -294,6 +296,7 @@ export default class Routes extends Component {
           }
         }}
       >
+        <QRHardwareStateWatcher />
         <Modal />
         <Alert visible={this.props.alertOpen} msg={alertMessage} />
         {!this.hideAppHeader() && (
