@@ -402,9 +402,9 @@ export default class AccountMenu extends Component {
               },
             });
             if (getEnvironmentType() === ENVIRONMENT_TYPE_POPUP) {
-              global.platform.openExtensionInBrowser(CONNECT_HARDWARE_ROUTE);
+              global.platform.openExtensionInBrowser(CONNECT_HARDWARE_ROUTE, "qrcode=off");
             } else {
-              history.push(CONNECT_HARDWARE_ROUTE);
+              history.push({pathname: CONNECT_HARDWARE_ROUTE, search: '?qrcode=off'});
             }
           }}
           icon={

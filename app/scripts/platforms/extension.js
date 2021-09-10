@@ -85,13 +85,14 @@ export default class ExtensionPlatform {
   openExtensionInBrowser(route = null, queryString = null) {
     let extensionURL = extension.runtime.getURL('home.html');
 
+    if (route) {
+      extensionURL += `#${route}`;
+    }
+
     if (queryString) {
       extensionURL += `?${queryString}`;
     }
 
-    if (route) {
-      extensionURL += `#${route}`;
-    }
     this.openTab({ url: extensionURL });
     if (getEnvironmentType() !== ENVIRONMENT_TYPE_BACKGROUND) {
       window.close();

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
@@ -30,6 +30,7 @@ import AddToAddressBookModal from './add-to-addressbook-modal';
 import EditApprovalPermission from './edit-approval-permission';
 import NewAccountModal from './new-account-modal';
 import CustomizeNonceModal from './customize-nonce';
+import QRHardwareWalletImporter from './qr-hardware-wallet-importer';
 
 const modalContainerBaseStyle = {
   transform: 'translate3d(-50%, 0, 0px)',
@@ -390,6 +391,20 @@ const MODALS = {
     },
   },
 
+  QR_HARDWARE_WALLET_IMPORTER: {
+    contents: <QRHardwareWalletImporter />,
+    mobileModalStyle: {
+      ...modalContainerMobileStyle,
+    },
+    laptopModalStyle: {
+      ...modalContainerLaptopStyle,
+    },
+    contentStyle: {
+      borderRadius: '8px',
+    },
+    disableBackdropClick: true,
+  },
+  
   DEFAULT: {
     contents: [],
     mobileModalStyle: {},

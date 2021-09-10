@@ -14,6 +14,7 @@ import { stripHexPrefix } from 'ethereumjs-util';
 import log from 'loglevel';
 import TrezorKeyring from 'eth-trezor-keyring';
 import LedgerBridgeKeyring from '@metamask/eth-ledger-bridge-keyring';
+import { MetaMaskKeyring as QRHardwareKeyring } from '@keystonehq/metamask-airgapped-keyring';
 import EthQuery from 'eth-query';
 import nanoid from 'nanoid';
 import {
@@ -342,7 +343,11 @@ export default class MetamaskController extends EventEmitter {
       preferencesController: this.preferencesController,
     });
 
-    const additionalKeyrings = [TrezorKeyring, LedgerBridgeKeyring];
+    const additionalKeyrings = [
+      TrezorKeyring,
+      LedgerBridgeKeyring,
+      QRHardwareKeyring,
+    ];
     this.keyringController = new KeyringController({
       keyringTypes: additionalKeyrings,
       initState: initState.KeyringController,
@@ -557,10 +562,13 @@ export default class MetamaskController extends EventEmitter {
       TokenListController: this.tokenListController,
     });
 
+    this.qrHardwareKeyring = new QRHardwareKeyring();
+
     this.memStore = new ComposableObservableStore({
       config: {
         AppStateController: this.appStateController.store,
         NetworkController: this.networkController.store,
+        QRHardwareState: this.initialQRHardwareState.bind(this)(),
         AccountTracker: this.accountTracker.store,
         TxController: this.txController.memStore,
         CachedBalancesController: this.cachedBalancesController.store,
@@ -811,6 +819,16 @@ export default class MetamaskController extends EventEmitter {
         this,
       ),
       setLedgerLivePreference: nodeify(this.setLedgerLivePreference, this),
+
+      // qr hardware devices
+      submitQRHardwareCryptoHDKey: nodeify(
+        this.qrHardwareKeyring.submitCryptoHDKey,
+        this.qrHardwareKeyring,
+      ),
+      cancelReadQRHardwareCryptoHDKey: nodeify(
+        this.qrHardwareKeyring.cancelReadCryptoHDKey,
+        this.qrHardwareKeyring,
+      ),
 
       // mobile
       fetchInfoToSync: nodeify(this.fetchInfoToSync, this),
@@ -1434,6 +1452,9 @@ export default class MetamaskController extends EventEmitter {
         break;
       case 'ledger':
         keyringName = LedgerBridgeKeyring.type;
+        break;
+      case 'qr-hardware':
+        keyringName = QRHardwareKeyring.type;
         break;
       default:
         throw new Error(
@@ -3035,5 +3056,17 @@ export default class MetamaskController extends EventEmitter {
    */
   setLocked() {
     return this.keyringController.setLocked();
+  }
+
+  //qr hardware related methods
+
+  initialQRHardwareState() {
+    const qrHardwareStore = new ObservableStore({
+      qrHardware: this.qrHardwareKeyring.getMemStore().getState(),
+    });
+    this.qrHardwareKeyring.getMemStore().subscribe((state) => {
+      qrHardwareStore.updateState({ qrHardware: state });
+    });
+    return qrHardwareStore;
   }
 }

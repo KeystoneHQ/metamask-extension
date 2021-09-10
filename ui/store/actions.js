@@ -2862,3 +2862,26 @@ export async function setUnconnectedAccountAlertShown(origin) {
 export async function setWeb3ShimUsageAlertDismissed(origin) {
   await promisifiedBackground.setWeb3ShimUsageAlertDismissed(origin);
 }
+
+// QR Hardware Wallets
+
+export function showQRHardwareWalletImporter() {
+  return (dispatch) => {
+    dispatch(
+      showModal({
+        name: 'QR_HARDWARE_WALLET_IMPORTER',
+      }),
+    );
+  };
+}
+
+export async function submitQRHardwareCryptoHDKey(cbor) {
+  await promisifiedBackground.submitQRHardwareCryptoHDKey(cbor);
+}
+
+export function cancelReadQRHardwareCryptoHDKey() {
+  return async (dispatch) => {
+    dispatch(hideLoadingIndication());
+    await promisifiedBackground.cancelReadQRHardwareCryptoHDKey();
+  };
+}
