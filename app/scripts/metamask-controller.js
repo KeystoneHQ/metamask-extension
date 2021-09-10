@@ -15,6 +15,7 @@ import log from 'loglevel';
 import TrezorKeyring from 'eth-trezor-keyring';
 import LedgerBridgeKeyring from '@metamask/eth-ledger-bridge-keyring';
 import LatticeKeyring from 'eth-lattice-keyring';
+import { MetaMaskKeyring as QRHardwareKeyring } from '@keystonehq/metamask-airgapped-keyring';
 import EthQuery from 'eth-query';
 import nanoid from 'nanoid';
 import {
@@ -229,6 +230,8 @@ export default class MetamaskController extends EventEmitter {
       },
     });
 
+    this.qrHardwareKeyring = new QRHardwareKeyring();
+
     this.appStateController = new AppStateController({
       addUnlockListener: this.on.bind(this, 'unlock'),
       isUnlocked: this.isUnlocked.bind(this),
@@ -236,6 +239,7 @@ export default class MetamaskController extends EventEmitter {
       onInactiveTimeout: () => this.setLocked(),
       showUnlockRequest: opts.showUserConfirmation,
       preferencesStore: this.preferencesController.store,
+      qrHardwareStore: this.qrHardwareKeyring.getMemStore(),
     });
 
     const currencyRateMessenger = this.controllerMessenger.getRestricted({
@@ -375,6 +379,7 @@ export default class MetamaskController extends EventEmitter {
       TrezorKeyring,
       LedgerBridgeKeyring,
       LatticeKeyring,
+      QRHardwareKeyring,
     ];
     this.keyringController = new KeyringController({
       keyringTypes: additionalKeyrings,
@@ -857,6 +862,16 @@ export default class MetamaskController extends EventEmitter {
       establishLedgerTransportPreference: nodeify(
         this.establishLedgerTransportPreference,
         this,
+      ),
+
+      // qr hardware devices
+      submitQRHardwareCryptoHDKey: nodeify(
+        this.qrHardwareKeyring.submitCryptoHDKey,
+        this.qrHardwareKeyring,
+      ),
+      cancelReadQRHardwareCryptoHDKey: nodeify(
+        this.qrHardwareKeyring.cancelReadCryptoHDKey,
+        this.qrHardwareKeyring,
       ),
 
       // mobile
@@ -1550,6 +1565,9 @@ export default class MetamaskController extends EventEmitter {
         break;
       case 'ledger':
         keyringName = LedgerBridgeKeyring.type;
+        break;
+      case 'QR Hardware':
+        keyringName = QRHardwareKeyring.type;
         break;
       case 'lattice':
         keyringName = LatticeKeyring.type;
