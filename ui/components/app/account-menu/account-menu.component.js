@@ -404,12 +404,12 @@ export default class AccountMenu extends Component {
             if (getEnvironmentType() === ENVIRONMENT_TYPE_POPUP) {
               global.platform.openExtensionInBrowser(
                 CONNECT_HARDWARE_ROUTE,
-                'qrcode=off',
+                'qrcode=on',
               );
             } else {
               history.push({
                 pathname: CONNECT_HARDWARE_ROUTE,
-                search: '?qrcode=off',
+                search: '?qrcode=on',
               });
             }
           }}
