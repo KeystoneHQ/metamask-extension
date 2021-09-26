@@ -167,9 +167,20 @@ export default class Home extends PureComponent {
       showRestorePrompt,
       threeBoxLastUpdated,
       threeBoxSynced,
+      hasQRHardwareSignRequest,
+      isNotification,
+      totalUnapprovedCount,
     } = this.props;
 
     if (!prevState.closing && this.state.closing) {
+      global.platform.closeCurrentWindow();
+    }
+
+    if (
+      !hasQRHardwareSignRequest &&
+      isNotification &&
+      totalUnapprovedCount === 0
+    ) {
       global.platform.closeCurrentWindow();
     }
 
