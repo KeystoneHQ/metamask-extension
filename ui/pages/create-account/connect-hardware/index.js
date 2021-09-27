@@ -272,6 +272,7 @@ class ConnectHardwareForm extends Component {
 
     return (
       <AccountList
+        isQRHardwareDevice={this.state.device === 'qr-hardware'}
         onPathChange={this.onPathChange}
         selectedPath={this.props.defaultHdPaths[this.state.device]}
         device={this.state.device}
