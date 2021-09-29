@@ -1,4 +1,7 @@
 {
+  "QRHardwareSignRequestTitle": {
+    "message": "Request Signature"
+  },
   "QRHardwareWalletImporterTitle": {
     "message": "Import QR Wallet"
   },
