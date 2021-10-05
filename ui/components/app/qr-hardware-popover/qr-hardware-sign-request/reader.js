@@ -18,15 +18,19 @@ const Reader = ({
 
   const handleSuccess = (ur) => {
     return new Promise((resolve, reject) => {
-      const ethSignature = ETHSignature.fromCBOR(ur.cbor);
-      const buffer = ethSignature.getRequestId();
-      const signId = uuid.stringify(buffer);
-      if (signId === requestId) {
-        submitQRHardwareSignature(signId, ur.cbor.toString('hex'))
-          .then(resolve)
-          .catch(reject);
+      if (ur.type === 'eth-signature') {
+        const ethSignature = ETHSignature.fromCBOR(ur.cbor);
+        const buffer = ethSignature.getRequestId();
+        const signId = uuid.stringify(buffer);
+        if (signId === requestId) {
+          submitQRHardwareSignature(signId, ur.cbor.toString('hex'))
+            .then(resolve)
+            .catch(reject);
+        } else {
+          reject(new Error('#mismatched_signId'));
+        }
       } else {
-        reject(new Error('#mismatched_signId'));
+        reject(new Error('unknownQrCode'));
       }
     });
   };
