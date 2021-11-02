@@ -90,7 +90,7 @@ export default class Home extends PureComponent {
     seedPhraseBackedUp: PropTypes.bool.isRequired,
     newNetworkAdded: PropTypes.string,
     setNewNetworkAdded: PropTypes.func.isRequired,
-    hasQRHardwareSignRequest: PropTypes.bool.isRequired,
+    isSigningQRHardwareTransaction: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -111,12 +111,12 @@ export default class Home extends PureComponent {
       showAwaitingSwapScreen,
       swapsFetchParams,
       pendingConfirmations,
-      hasQRHardwareSignRequest,
+      isSigningQRHardwareTransaction,
     } = this.props;
 
     // eslint-disable-next-line react/no-unused-state
     this.setState({ mounted: true });
-    if (hasQRHardwareSignRequest) {
+    if (isSigningQRHardwareTransaction) {
       return;
     }
     if (isNotification && totalUnapprovedCount === 0) {
@@ -173,7 +173,7 @@ export default class Home extends PureComponent {
       showRestorePrompt,
       threeBoxLastUpdated,
       threeBoxSynced,
-      hasQRHardwareSignRequest,
+      isSigningQRHardwareTransaction,
       isNotification,
       totalUnapprovedCount,
     } = this.props;
@@ -183,7 +183,7 @@ export default class Home extends PureComponent {
     }
 
     if (
-      !hasQRHardwareSignRequest &&
+      !isSigningQRHardwareTransaction &&
       isNotification &&
       totalUnapprovedCount === 0
     ) {
