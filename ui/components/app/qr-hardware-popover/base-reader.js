@@ -25,7 +25,7 @@ const BaseReader = ({
   const [ready, setReady] = useState(READY_STATE.ACCESSING_CAMERA);
   const [error, setError] = useState(null);
   const [urDecoder, setURDecoder] = useState(new URDecoder());
-  const [progress, setProgress] = useState(null);
+  const [progress, setProgress] = useState(0);
   let permissionChecker = null;
   const mounted = useRef(false);
 
@@ -210,7 +210,7 @@ const BaseReader = ({
             />
           </div>
         </div>
-        {progress && (
+        {progress > 0 && (
           <div className="qr-scanner__status">{`${Math.floor(
             progress * 100,
           )} %`}</div>
