@@ -2,6 +2,9 @@
   "QRHardwareInvalidTransactionTitle": {
     "message": "非法交易"
   },
+  "QRHardwarePubkeyAccountOutOfRange": {
+    "message":"暂无更多账户，若想切换到其他账户，请在硬件钱包中选择想要的账户重新同步。"
+  },
   "QRHardwareMismatchedSignId": {
     "message": "扫描的签名二维码不属于当前交易，请检查交易详情后重试。"
   },

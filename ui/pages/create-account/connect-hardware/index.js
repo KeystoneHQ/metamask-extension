@@ -193,6 +193,10 @@ class ConnectHardwareForm extends Component {
           this.setState({
             error: errorMessage,
           });
+        } else if (errorMessage.toLowerCase().includes("KeystoneError#pubkey_account.no_expected_account".toLowerCase())) {
+          this.setState({
+            error: this.context.t("QRHardwarePubkeyAccountOutOfRange"),
+          })
         }
       });
   };

@@ -2,6 +2,9 @@
   "QRHardwareInvalidTransactionTitle": {
     "message": "Error"
   },
+  "QRHardwarePubkeyAccountOutOfRange": {
+    "message":"No more accounts. If you want to select other account, please select account you want in your hardware wallet and reconnect."
+  },
   "QRHardwareMismatchedSignId": {
     "message": "Incongruent transaction data. Please check the transaction details."
   },
