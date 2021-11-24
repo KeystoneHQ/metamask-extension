@@ -13,10 +13,10 @@ Install the MetaMask QRsigner Beta Extension and upgrade your Keystone Firmware.
 
 #### Keystone Firmware Upgrade
 
-1. Firmware version M-4.6 (Beta) running on Keystone Essential or Pro. 
+1. Firmware version M-4.8 (Beta) running on Keystone Essential or Pro. 
 
-   *  Firmware Download：[M-4.6](https://github.com/KeystoneHQ/metamask-extension/releases/download/V10.1.1/M-4.6.zip)
-   * checksum：788a313eefcf9ba326a621ee6c89d800bf74412e3c77c7ee7f5114111886d4f4
+   *  Firmware Download：[M-4.8](https://github.com/KeystoneHQ/metamask-extension/releases/download/V10.6.2-Beta/M-4.8.zip)
+   * checksum：0a6f180a185551be6df385c5364b668abed50557631afb04383ec34920659a40
   
     (Please read [How to upgrade](https://support.keyst.one/getting-started/firmware-upgrading) firmware for more details.)
 #### MetaMask QRsigner Beta Extension installed on Chrome
@@ -25,7 +25,7 @@ Install the MetaMask QRsigner Beta Extension and upgrade your Keystone Firmware.
 
 1. Download the MetaMask QRsigner Beta Extension V10.1.1 package  to your computer, locate the downloaded ZIP file and unzip it.
 
-     * MetaMask QRsigner Beta Extension Download: [MetaMask-Chrome-10.4.1](https://github.com/KeystoneHQ/metamask-extension/releases/download/V10.1.1/metamask-chrome-10.4.1.zip)
+     * MetaMask QRsigner Beta Extension Download: [MetaMask-Chrome-10.6.2](https://github.com/KeystoneHQ/metamask-extension/releases/download/V10.6.2-Beta/metamask-chrome-10.6.2.zip)
 
 2. Go to **chrome://extensions/** and check the box for **Developer mode** in the top right.
 ![image](https://user-images.githubusercontent.com/37337093/137884326-96966585-6bbd-4d68-a26a-77ddd04ef513.png)
