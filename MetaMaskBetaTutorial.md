@@ -15,7 +15,7 @@ Install the MetaMask QRsigner Beta Extension and upgrade your Keystone Firmware.
 
 1. Firmware version M-4.8 (Beta) running on Keystone Essential or Pro. 
 
-   *  Firmware Download：[M-4.8](https://github.com/KeystoneHQ/metamask-extension/releases/download/V10.6.2-Beta/M-4.8.zip)
+   *  Firmware Download：[M-5.0](https://github.com/KeystoneHQ/Keystone-cold-app/releases/download/M-5.0/M-5.0.zip )
    * checksum：0a6f180a185551be6df385c5364b668abed50557631afb04383ec34920659a40
   
     (Please read [How to upgrade](https://support.keyst.one/getting-started/firmware-upgrading) firmware for more details.)
